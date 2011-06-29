@@ -1,101 +1,85 @@
-<div class="info-table-content">
-	<div class="frame">
-		<div class="task-list">
-			<div class="holder">
-				<div class="thead">
-					<div class="cell-1">Icon</div>
-					<div class="cell-2">Task Type</div>
-					<div class="cell-3">Title</div>
-					<div class="cell-4">Due Date</div>
-					<!-- <div class="cell-5"></div> -->
-				</div>
-				<%= @tasks.each do |task| %>
-				<div class="task-row">
-					<div class="box">
-						<div class="checkbox">
-							<input type="checkbox" />
-						</div>
-						<div class="flag">
-							<a href="#"><span>Flag</span></a>
-						</div>
-						<div class="cell-2"><%= task.type %></div>
-						<div class="cell-3"><%= task.title %></div>
-						<div class="cell-4"><%= task.due_date %></div>
-						<a href="#" class="opener"><span>Open/Close</span></a>
+<div class="content-holder">
+	<!--section bar starts-->
+	<div class="section-bar">
+		<form action="#" class="table-search">
+			<fieldset>
+				<input type="text" class="text" value="Search table" />
+				<input type="submit" class="submit" value="Search" />
+			</fieldset>
+		</form>
+		<ul class="filter-list">
+			<% Task.subclasses.each do |task_type| %>
+				<li>
+					<%= link_to task_type.to_s.gsub('Task', '').pluralize, tasks_path(:type => task_type) %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+
+	<div class="info-table-content">
+		<div class="frame">
+			<div class="task-list">
+				<div class="holder">
+					<div class="thead">
+						<div class="cell-1">Icon</div>
+						<div class="cell-2">Task Type</div>
+						<div class="cell-3">Title</div>
+						<div class="cell-4">Due Date</div>
+						<!-- <div class="cell-5"></div> -->
 					</div>
-					<div class="slide">
-						<div class="task-info">
-							<div class="col-1">
-								<p>
-									<strong>Task Description:</strong>  
-									<%= task.description %>
-								</p>
+					<% @tasks.each do |task| %>
+					<div class="task-row">
+						<div class="box">
+							<div class="checkbox">
+								<input type="checkbox" />
 							</div>
-							<div class="col-2">
-								<em class="date">Created: <%= task.created_at %></em>
-								<ul class="task-options">
-									<li>
-										<a href="#" class="history">History</a>
-										<div class="tooltip">
-											<div class="bg"><div class="l">History</div><div class="r">&nbsp;</div></div>
-											<span class="arrow">&nbsp;</span>
-										</div>
-									</li>
-									<li>
-										<a href="#" class="view">View</a>
-										<%= link_to "View", task_path(task) %>
-										<div class="tooltip">
-											<div class="bg"><div class="l">View</div><div class="r">&nbsp;</div></div>
-											<span class="arrow">&nbsp;</span>
-										</div>
-									</li>
-									<li>
-										<a href="#" class="edit">Edit</a>
-										<div class="tooltip">
-											<div class="bg"><div class="l">Edit</div><div class="r">&nbsp;</div></div>
-											<span class="arrow">&nbsp;</span>
-										</div>
-									</li>
-								</ul>
+							<div class="flag">
+								<a href="#"><span>Flag</span></a>
+							</div>
+							<div class="cell-2"><%= task.type %></div>
+							<div class="cell-3"><%= task.title %></div>
+							<div class="cell-4"><%= task.due_date %></div>
+							<a href="#" class="opener"><span>Open/Close</span></a>
+						</div>
+						<div class="slide">
+							<div class="task-info">
+								<div class="col-1">
+									<p>
+										<strong>Task Description:</strong>  
+										<%= task.description %>
+									</p>
+								</div>
+								<div class="col-2">
+									<em class="date">Created: <%= task.created_at %></em>
+									<ul class="task-options">
+										<li>
+											<a href="#" class="history">History</a>
+											<div class="tooltip">
+												<div class="bg"><div class="l">History</div><div class="r">&nbsp;</div></div>
+												<span class="arrow">&nbsp;</span>
+											</div>
+										</li>
+										<li>
+											<a href="#" class="view">View</a>
+											<%= link_to "View", task_path(task) %>
+											<div class="tooltip">
+												<div class="bg"><div class="l">View</div><div class="r">&nbsp;</div></div>
+												<span class="arrow">&nbsp;</span>
+											</div>
+										</li>
+										<li>
+											<a href="#" class="edit">Edit</a>
+											<div class="tooltip">
+												<div class="bg"><div class="l">Edit</div><div class="r">&nbsp;</div></div>
+												<span class="arrow">&nbsp;</span>
+											</div>
+										</li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<% end %>
-			</div>
-		</div>
-		<a href="#" class="scroll-more">scroll for more</a>
-		<div class="recently-done">
-			<div class="heading">
-				<h2>Recently Done</h2>
-				<a href="#" class="btn-close">Close</a>
-			</div>
-			<div class="task-row">
-				<div class="box">
-					<div class="checkbox">
-						<input type="checkbox" class="checkbox" />
-					</div>
-					<div class="flag">
-						<a href="#"><span>Flag</span></a>
-					</div>
-					<div class="cell-2">Nick Miller</div>
-					<div class="cell-3">222 Main Road</div>
-					<div class="cell-4">Active</div>
-					<a href="#" class="opener"><span>Open/Close</span></a>
-				</div>
-			</div>
-			<div class="task-row">
-				<div class="box">
-					<div class="checkbox">
-						<input type="checkbox" class="checkbox" />
-					</div>
-					<div class="flag">
-						<a href="#"><span>Flag</span></a>
-					</div>
-					<div class="cell-2">Nick Miller</div>
-					<div class="cell-3">222 Main Road</div>
-					<div class="cell-4">Active</div>
-					<a href="#" class="opener"><span>Open/Close</span></a>
+					<% end %>
 				</div>
 			</div>
 		</div>
