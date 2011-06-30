@@ -1,1 +1,61 @@
-<p>Yay</p>
+<div id="content">
+	<div class="content-box">
+		<div class="content-holder">
+			<div class="content-box">
+
+			<%= form_for @task, :url => {:action => :create}, :html => {:class => 'content-form', :id => 'create_task_form'} do |f| %>
+				<fieldset>
+					<%#= current_user.franchise.id %>
+					<%= f.hidden_field :task_list_id %>
+					<%= f.hidden_field :user_id %>
+					<%= f.hidden_field :created_by %>
+					<%= f.hidden_field :priority %>
+					<%= f.hidden_field :completed %>
+					
+					<div class="row">
+						<label title="radio-button">Task Type</label>
+						<ul class="radio-list">
+							<li>
+								<%= radio_button_tag :type, "GeneralTask" %> <%= label_tag(:type, "General") %>
+							</li>
+							<li>
+								<%= radio_button_tag :type, "MaintenanceTask" %> <%= label_tag(:type, "Maintenance") %>
+							</li>
+						</ul>
+					</div>
+					
+					<div class="row">
+						<label for="date">Due Date</label>
+						<div class="datepicker">
+							<div class="text">
+								<%= f.text_field :due_date, :class => 'datepicker-input', :id => 'date' %>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<label for="text-input-1">Task Title</label>
+						<div class="text">
+							<div class="bg">
+								<%= f.text_field :title, :id => "text-input-1", :value => "Title of task" %>
+								<!-- <input type="text" id="text-input-1" value="Textbox text" /> -->
+							</div>
+						</div>
+						<em class="form-note"></em>
+					</div>
+					
+					<div class="box">
+						<label for="wysiwyg-textarea">Additional Details of Task</label>
+						<%= f.text_area :description, :class => "wysiwyg", :id => "wysiwyg-textarea", :cols => "20", :rows => "10" %>
+					</div>
+					
+					<div class="row">
+						<a class="btn-action" onclick="document.forms[0].submit();">Create</a> 
+					</div>
+					
+				</fieldset>
+			<% end %>
+			</div>
+		</div>
+	</div>
+</div>

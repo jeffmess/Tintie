@@ -4,16 +4,19 @@ module Tintie
     respond_to :html, :xml, :json
     
     def index
-      # Should only respond with tasks for a list.
       respond_with(@tasks = Task.all)
     end
     
     def new
-      respond_with(@task = Task.new)
+      respond_with(@task = Task.new(:task_list_id => current_user.franchise.id,
+                                    :completed => false,
+                                    :priority => false,
+                                    :created_by => current_user.id,
+                                    :user_id => current_user.id))
     end
     
     def create
-      @task = Task.new(params[:task])
+      @task = Task.create(params[:task])
       respond_with(@task)
     end
     
