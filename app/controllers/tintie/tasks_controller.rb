@@ -8,6 +8,10 @@ module Tintie
       respond_with(@tasks = Task.all)
     end
     
+    def new
+      respond_with(@task = Task.new)
+    end
+    
     def create
       @task = Task.new(params[:task])
       respond_with(@task)
