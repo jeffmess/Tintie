@@ -11,8 +11,9 @@ module Tintie
 
       desc <<-CONTENT
   This will install Tintie's model, controller, view,\
-  and assets files accordingly. It will also copy the\
-  routes into your routes file.
+  The following Javascript libraries\
+  1. Fancybox\
+  2. Backbone.js\
 
   CONTENT
 
@@ -35,6 +36,16 @@ module Tintie
       
       def copy_config
         invoke 'tintie:install' if options.config?
+      end
+      
+      def copy_backbone_files
+        invoke 'tintie:install_backbone'
+      end
+      
+      def inject_fancybox
+        inject_into_file "app/assets/stylesheets/application.css", :after => "*= require_self" do
+          "\n *= require 'fancybox'\n"
+        end
       end
     end
   end
