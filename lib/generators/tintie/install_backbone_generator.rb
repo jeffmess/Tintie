@@ -20,10 +20,10 @@ module Tintie
           create_file "app/assets/javascripts/backbone/#{dir}/.gitkeep" unless options[:skip_git]
         end
       end
-    
-      def create_app_file
-        template "app.coffee", "app/assets/javascripts/backbone/tintie.coffee"
-      end
+          # 
+          # def create_app_file
+          #   template "app.coffee", "app/assets/javascripts/backbone/tintie.coffee"
+          # end
       
       def copy_json_false
         backbone_rb =  'config/initializers/backbone.rb'

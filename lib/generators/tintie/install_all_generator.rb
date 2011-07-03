@@ -40,6 +40,11 @@ module Tintie
       
       def copy_backbone_files
         invoke 'tintie:install_backbone'
+        say_status('creating', 'Copying Tintie backbone javascript files', :green)
+        copy_file 'lib/tintie/backbone/application.js', 'app/assets/javascripts/backbone/tintie.js'
+        copy_file 'lib/tintie/backbone/models/task.js', 'app/assets/javascripts/backbone/models/task.js'
+        copy_file 'lib/tintie/backbone/controllers/tasks.js', 'app/assets/javascripts/backbone/controllers/tasks.js'
+
       end
       
       def copy_fancybox_files
