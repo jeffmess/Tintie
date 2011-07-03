@@ -1,6 +1,5 @@
 module Tintie
   module Generators
-    # https://github.com/codebrew/backbone-rails
     class InstallBackboneGenerator < Rails::Generators::Base
       source_root File.expand_path("../../templates", __FILE__)
   
@@ -11,7 +10,7 @@ module Tintie
                                       
       def inject_backbone
         inject_into_file "app/assets/javascripts/application.js", :before => "//= require_tree" do
-          "//= require underscore\n//= require backbone\n//= require backbone_rails_sync\n//= require backbone_datalink\n//= require backbone/#{application_name}\n"
+          "//= require underscore\n//= require backbone\n//= require backbone_rails_sync\n//= require backbone_datalink\n//= require backbone/tintie\n//= require handlebars\n"
         end
       end
     
@@ -23,17 +22,15 @@ module Tintie
       end
     
       def create_app_file
-        template "app.coffee", "app/assets/javascripts/backbone/#{application_name}.coffee"
+        template "app.coffee", "app/assets/javascripts/backbone/tintie.coffee"
       end
-    
-      protected
-        def application_name
-          if defined?(Rails) && Rails.application
-            Rails.application.class.name.split('::').first.underscore
-          else
-            "application"
-          end
-        end
+      
+      def copy_json_false
+        backbone_rb =  'config/initializers/backbone.rb'
+        create_file backbone_rb
+        say_status('creating', 'backbone.rb - excludes root in json return just like Backbone likes it.', :green)
+        append_to_file backbone_rb, 'ActiveRecord::Base.include_root_in_json = false'
+      end
     end
   end
 end

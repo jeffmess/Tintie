@@ -42,9 +42,13 @@ module Tintie
         invoke 'tintie:install_backbone'
       end
       
-      def inject_fancybox
-        inject_into_file "app/assets/stylesheets/application.css", :after => "*= require_self" do
-          "\n *= require 'fancybox'\n"
+      def copy_fancybox_files
+        invoke 'tintie:install_fancybox'
+      end
+      
+      def inject_tintie
+        inject_into_file "app/assets/javascripts/application.js", :before => "//= require_tree ." do
+          "//= require tintie\n"
         end
       end
     end
