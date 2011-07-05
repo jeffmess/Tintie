@@ -4,6 +4,12 @@ module Tintie
     respond_to :html, :xml, :json
     
     def index
+      @task = Task.new(:task_list_id => current_user.franchise.id,
+                                    :completed => false,
+                                    :priority => false,
+                                    :created_by => current_user.id,
+                                    :user_id => current_user.id)
+                                    
       respond_with(@tasks = Task.all)
     end
     
@@ -16,8 +22,17 @@ module Tintie
     end
     
     def create
-      @task = Task.create(params[:task])
-      respond_with(@task)
+      @task = Task.new(params[:task])
+
+      respond_to do |format|
+        if @task.save
+          format.html { redirect_to(@task, :notice => 'Task was successfully created.') }
+          format.json  { render :json => @task, :status => :created, :location => @task }
+        else
+          format.html { render :action => "new" }
+          format.json  { render :json => @task.errors, :status => :unprocessable_entity }
+        end
+      end
     end
     
     def update
