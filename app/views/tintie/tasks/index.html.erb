@@ -44,10 +44,10 @@
 	</div>
 	
 	<script id="task_template" type="text/html">
-		<div class="task-row">
+		<div class="task-row" id="task_row_{{id}}">
 			<div class="box">
 				<div class="checkbox">
-					<input type="checkbox" />
+					<input type="checkbox" {{completed}} />
 				</div>
 				<div class="flag">
 					<a href="#"><span>Flag</span></a>
@@ -55,9 +55,9 @@
 				<div class="cell-2">{{type}}</div>
 				<div class="cell-3">{{title}}</div>
 				<div class="cell-4">{{due_date}}</div>
-				<a href="#" class="opener"><span>Open/Close</span></a>
+				<a href="" class="opener" id="{{id}}"><span>Open/Close</span></a>
 			</div>
-			<div class="slide">
+			<div class="slide" id="slide_{{id}}">
 				<div class="task-info">
 					<div class="col-1">
 						<p>
