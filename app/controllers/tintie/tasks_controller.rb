@@ -36,8 +36,13 @@ module Tintie
     end
     
     def update
+      # Better way to do this? Quite ugly.
+      params.delete(:task)
+      params.delete(:action)
+      params.delete(:controller)
+
       @task = Task.find(params[:id])
-      respond_with(@task.update_attributes(params[:task]))
+      respond_with(@task.update_attributes(params))
     end
     
     def show
