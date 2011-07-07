@@ -13,4 +13,8 @@ class Task < ActiveRecord::Base
   def self.subclasses
     direct_descendants.map(&:name)
   end
+  
+  def created_by_email
+    User.find_by_id(user_id).email
+  end
 end

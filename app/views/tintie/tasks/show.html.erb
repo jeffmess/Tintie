@@ -1,0 +1,26 @@
+<div id="content">
+	<div class="content-box">
+		<div class="content-holder">
+			<div class="content-box">
+				<h2><%= @task.title %></h2>
+				<p>Due Date: <%= pretty_date(@task.due_date)%></p>
+				<p>Status: <%= @task.completed? ? "Completed" : "Not Completed" %></p>
+				<h3>Task created by</h3>
+				
+				<ul class="comment-list">
+					<li>
+						<ul class="entry-meta">
+							<li><a href="#"><%= @task.created_by_email %></a></li>
+							<li><%= pretty_datetime(@task.created_at) %></li>
+						</ul>
+						<p>
+							<%= @task.description %>
+						</p>
+					</li>
+				</ul>
+				
+				<h3>Comments</h3>
+			</div>
+		</div>
+	</div>
+</div>

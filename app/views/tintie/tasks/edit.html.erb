@@ -1,0 +1,14 @@
+<div id="content">
+	<div class="content-box">
+		<div class="content-holder">
+			<div class="content-box">
+				<%= form_for @task, :url => {:action => :update, :method => :put}, :html => {:class => 'content-form', :id => 'create_task_form'} do |f| %>
+					<fieldset>
+						<%= render "fancy_form", :f => f %>
+						<%= f.submit %>
+					</fieldset>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
