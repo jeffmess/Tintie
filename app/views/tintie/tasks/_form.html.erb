@@ -1,9 +1,12 @@
+<div id="form" style="display:none;">
 <div id="content">
 	<div class="content-box">
 		<div class="content-holder">
 			<div class="content-box">
 				<!-- <div id="tasks_app"> -->
-
+					<div class="row">
+						<a class="btn-close" href="#">Close</a>
+					</div>
 			<%= form_for @task, :url => {:action => :create}, :html => {:class => 'content-form', :id => 'create_task_form'} do |f| %>
 				<fieldset>
 					<%#= current_user.franchise.id %>
@@ -65,5 +68,6 @@
 				<!-- </div> -->
 			</div>
 		</div>
+	</div>
 	</div>
 </div>

@@ -1,54 +1,54 @@
-<div class="action-bar">
-	<ul>
-		<li><%= link_to 'create', new_task_path, :id => 'create_task' %></li>
-	</ul>
-</div>
+<div id="tasks_app">
+	<div class="action-bar">
+		<ul>
+			<li><%= link_to 'create', new_task_path, :id => 'task_create' %></li>
+		</ul>
+	</div>
 
-<div class="content-holder">
-	<!--section bar starts-->
-	<div id="tasks_app">
-		<%= render 'form' %>
-		<div class="section-bar">
-			<form action="#" class="table-search">
-				<fieldset>
-					<input type="text" class="text" value="Search table" id="task_search" />
-					<input type="submit" class="submit" value="Search" />
-				</fieldset>
-			</form>
-			<ul class="filter-list">
-				<li><a href="#">All</a></li>
-				<li><a href="#">Today</a></li>
-				<li><a href="#">Tomorrow</a></li>
-				<li><a href="#">Next 7 days</a></li>
-				<li><a href="#">Later</a></li>
-				<li><a href="#">Without Date</a></li>
-				<li><a href="#">Overdue</a></li>
-				<%# Task.subclasses.each do |task_type| %>
-					<!-- <li> -->
-						<%#= link_to task_type.to_s.gsub('Task', '').pluralize, tasks_path(:type => task_type) %>
-					<!-- </li> -->
-				<%# end %>
-			</ul>
-		</div>
-		<div class="info-table-content">
-			<div class="frame">
-				<div class="task-list">
-					<div class="holder">
-						<div class="thead">
-							<div class="cell-1">Icon</div>
-							<div class="cell-2">Task Type</div>
-							<div class="cell-3">Title</div>
-							<div class="cell-4">Due Date</div>
-							<!-- <div class="cell-5"></div> -->
-						</div>
-						<div id="task_holder" class="task_holder">
+	<div class="content-holder">
+		<!--section bar starts-->
+			<%= render 'form' %>
+			<div class="section-bar">
+				<form action="#" class="table-search">
+					<fieldset>
+						<input type="text" class="text" value="Search table" id="search" />
+						<input type="submit" class="submit" value="Search" />
+					</fieldset>
+				</form>
+				<ul class="filter-list">
+					<li><a href="#">All</a></li>
+					<li class="today"><a href="#">Today</a></li>
+					<li><a href="#">Tomorrow</a></li>
+					<li><a href="#">Next 7 days</a></li>
+					<li><a href="#">Later</a></li>
+					<li><a href="#">Without Date</a></li>
+					<li><a href="#">Overdue</a></li>
+					<%# Task.subclasses.each do |task_type| %>
+						<!-- <li> -->
+							<%#= link_to task_type.to_s.gsub('Task', '').pluralize, tasks_path(:type => task_type) %>
+						<!-- </li> -->
+					<%# end %>
+				</ul>
+			</div>
+			<div class="info-table-content">
+				<div class="frame">
+					<div class="task-list">
+						<div class="holder">
+							<div class="thead">
+								<div class="cell-1">Icon</div>
+								<div class="cell-2">Task Type</div>
+								<div class="cell-3">Title</div>
+								<div class="cell-4">Due Date</div>
+								<!-- <div class="cell-5"></div> -->
+							</div>
+							<div id="task_holder" class="task_holder">
 
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	
 	<script id="task_template" type="text/html">
 		<div class="task-row" id="task_row_{{id}}">
@@ -59,7 +59,7 @@
 				<div class="flag">
 					<a href="#"><span>Flag</span></a>
 				</div>
-				<div class="cell-2">{{type}}</div>
+				<div class="cell-2">{{completed}}</div>
 				<div class="cell-3">{{title}}</div>
 				<div class="cell-4">{{due_date}}</div>
 				<a href="" class="opener" id="{{id}}"><span>Open/Close</span></a>
