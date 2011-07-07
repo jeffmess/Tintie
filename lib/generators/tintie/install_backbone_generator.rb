@@ -10,7 +10,7 @@ module Tintie
                                       
       def inject_backbone
         inject_into_file "app/assets/javascripts/application.js", :before => "//= require_tree" do
-          "//= require underscore\n//= require backbone\n//= require backbone_rails_sync\n//= require backbone_datalink\n//= require backbone/tintie\n//= require handlebars\n"
+          "//= require underscore\n//= require backbone\n//= require backbone_rails_sync\n//= require backbone_datalink\n//= require icanhaz\n//= require backbone/tintie\n//= require handlebars\n"
         end
       end
     
