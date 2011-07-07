@@ -11,16 +11,23 @@
 		<div class="section-bar">
 			<form action="#" class="table-search">
 				<fieldset>
-					<input type="text" class="text" value="Search table" />
+					<input type="text" class="text" value="Search table" id="task_search" />
 					<input type="submit" class="submit" value="Search" />
 				</fieldset>
 			</form>
 			<ul class="filter-list">
-				<% Task.subclasses.each do |task_type| %>
-					<li>
-						<%= link_to task_type.to_s.gsub('Task', '').pluralize, tasks_path(:type => task_type) %>
-					</li>
-				<% end %>
+				<li><a href="#">All</a></li>
+				<li><a href="#">Today</a></li>
+				<li><a href="#">Tomorrow</a></li>
+				<li><a href="#">Next 7 days</a></li>
+				<li><a href="#">Later</a></li>
+				<li><a href="#">Without Date</a></li>
+				<li><a href="#">Overdue</a></li>
+				<%# Task.subclasses.each do |task_type| %>
+					<!-- <li> -->
+						<%#= link_to task_type.to_s.gsub('Task', '').pluralize, tasks_path(:type => task_type) %>
+					<!-- </li> -->
+				<%# end %>
 			</ul>
 		</div>
 		<div class="info-table-content">
