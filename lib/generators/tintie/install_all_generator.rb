@@ -19,7 +19,7 @@ module Tintie
 
       def add_tintie_routes
         tintie_routes = %(resources :task_lists, :controller => 'tintie/task_lists', :only => [:create, :update, :index, :show]\n)
-        tintie_routes << %(  resources :tasks, :controller => 'tintie/tasks', :only => [:create, :update, :index, :show, :new]\n)
+        tintie_routes << %(  resources :tasks, :controller => 'tintie/tasks', :only => [:create, :update, :index, :show, :new, :edit]\n)
         route tintie_routes
       end
 

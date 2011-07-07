@@ -37,12 +37,27 @@ module Tintie
     
     def update
       # Better way to do this? Quite ugly.
-      params.delete(:task)
-      params.delete(:action)
-      params.delete(:controller)
+      if params[:commit] == 'Update Task'
+        @task = Task.find(params[:id])
 
-      @task = Task.find(params[:id])
-      respond_with(@task.update_attributes(params))
+        if @task.update_attributes(params[:task])
+          respond_with(@task, :status => :ok)
+        else
+          respond_with(@task.errors, :status => :unprocessable_entity)
+        end
+      else
+        # coming from backbone
+        params.delete(:task)
+        params.delete(:action)
+        params.delete(:controller)
+
+        @task = Task.find(params[:id])
+        respond_with(@task.update_attributes(params))
+      end
+    end
+    
+    def edit
+      respond_with(@task = Task.find(params[:id]))
     end
     
     def show
