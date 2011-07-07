@@ -13,8 +13,8 @@ class CreateTasksTable < ActiveRecord::Migration
       t.datetime  :completed_at
       t.datetime  :due_date
       
-      # t.string    :type
-      # t.references :linkable, :polymorphic => true
+      t.string    :type
+      t.references :linkable, :polymorphic => true
       
       t.timestamps
     end
