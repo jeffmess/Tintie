@@ -9,8 +9,8 @@ module Tintie
                                     :priority => false,
                                     :created_by => current_user.id,
                                     :user_id => current_user.id)
-                                    
-      respond_with(@tasks = Task.all)
+      
+      respond_with(@tasks = Task.for(current_user, params))
     end
     
     def new
@@ -61,7 +61,20 @@ module Tintie
     end
     
     def show
+      puts "what?"
       respond_with(@task = Task.find(params[:id]))
+    end
+
+    def due_date
+      puts "herere"
+      # render :nothing => true
+      respond_with(@task = Task.for(current_user, params))
+    end
+    
+    private
+    
+    def get_user_details
+      
     end
   end
 end

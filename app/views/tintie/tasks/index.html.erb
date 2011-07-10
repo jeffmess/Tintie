@@ -16,13 +16,13 @@
 					</fieldset>
 				</form>
 				<ul class="filter-list">
-					<li><a href="#">All</a></li>
+					<li class="all"><a href="#">All</a></li>
 					<li class="today"><a href="#">Today</a></li>
-					<li><a href="#">Tomorrow</a></li>
-					<li><a href="#">Next 7 days</a></li>
-					<li><a href="#">Later</a></li>
-					<li><a href="#">Without Date</a></li>
-					<li><a href="#">Overdue</a></li>
+					<li class="tomorrow"><a href="#">Tomorrow</a></li>
+					<li class="week"><a href="#">Next 7 days</a></li>
+					<li class="later"><a href="#">Later</a></li>
+					<li class="without_date"><a href="#">Without Date</a></li>
+					<li class="overdue"><a href="#">Overdue</a></li>
 					<%# Task.subclasses.each do |task_type| %>
 						<!-- <li> -->
 							<%#= link_to task_type.to_s.gsub('Task', '').pluralize, tasks_path(:type => task_type) %>
