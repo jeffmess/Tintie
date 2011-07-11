@@ -61,14 +61,15 @@ module Tintie
     end
     
     def show
-      puts "what?"
       respond_with(@task = Task.find(params[:id]))
     end
 
     def due_date
-      puts "herere"
-      # render :nothing => true
-      respond_with(@task = Task.for(current_user, params))
+      respond_with(@tasks = Task.for(current_user, params))
+    end
+    
+    def search
+      respond_with(@tasks = Task.search(current_user, params))
     end
     
     private
