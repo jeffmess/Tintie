@@ -1,13 +1,11 @@
 class Task < ActiveRecord::Base
   belongs_to :task_list
-  # belongs_to :owner, :class_name => 'User'
-  # belongs_to :create, :class_name => 'User'
   belongs_to :linkable, :polymorphic => true
   
   scope :completed, where(:completed => true)
   scope :incomplete, where(:completed => false)
   scope :today, where(:due_date => Time.now.beginning_of_day..Time.now.end_of_day)
-  scope :tomorrow, where(:due_date => Time.now.beginning_of_day..Time.now.tomorrow.end_of_day)
+  scope :tomorrow, where(:due_date => Time.now.tomorrow.beginning_of_day..Time.now.tomorrow.end_of_day)
   scope :week, where(:due_date => Time.now.beginning_of_day..7.days.from_now)
   scope :without_date, where(:due_date => nil)
   scope :later, where("due_date > ?", 7.days.from_now)

@@ -56,6 +56,12 @@ module Tintie
           "//= require tintie\n"
         end
       end
+      
+      def inject_date_formatter
+        inject_into_file "app/assets/javascripts/application.js", :before => "//= require_tree ." do
+          "//= require date_format\n"
+        end
+      end
     end
   end
 end

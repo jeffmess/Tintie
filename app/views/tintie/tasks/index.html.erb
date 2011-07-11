@@ -1,3 +1,4 @@
+
 <div id="tasks_app">
 	<div class="action-bar">
 		<ul>
@@ -54,14 +55,14 @@
 		<div class="task-row" id="task_row_{{id}}">
 			<div class="box">
 				<div class="checkbox">
-					<input type="checkbox" {{completed}} />
+					<input type="checkbox" {{#completed}}checked="checked"{{/completed}} />
 				</div>
 				<div class="flag">
 					<a href="#"><span>Flag</span></a>
 				</div>
-				<div class="cell-2">{{completed}}</div>
+				<div class="cell-2">{{type}}</div>
 				<div class="cell-3">{{title}}</div>
-				<div class="cell-4">{{due_date}}</div>
+				<div class="cell-4">{{due}}</div>
 				<a href="" class="opener" id="{{id}}"><span>Open/Close</span></a>
 			</div>
 			<div class="slide" id="slide_{{id}}">
@@ -73,7 +74,7 @@
 						</p>
 					</div>
 					<div class="col-2">
-						<em class="date">{{created_at}}</em>
+						<em class="date">{{created}}</em>
 						<ul class="task-options">
 							<li>
 								<a href="#" class="history">History</a>
