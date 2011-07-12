@@ -1,7 +1,7 @@
 module Tintie
   class TasksController < ::ApplicationController
-    
     respond_to :html, :xml, :json
+    before_filter :get_context
     
     def index
       @task = Task.new(:task_list_id => current_user.franchise.id,
@@ -10,7 +10,7 @@ module Tintie
                                     :created_by => current_user.id,
                                     :user_id => current_user.id)
       
-      respond_with(@tasks = Task.for(current_user, params))
+      respond_with(@tasks = Task.for(@context, params))
     end
     
     def new
@@ -65,17 +65,21 @@ module Tintie
     end
 
     def due_date
-      respond_with(@tasks = Task.for(current_user, params))
+      respond_with(@tasks = Task.for(@context, params))
     end
     
     def search
-      respond_with(@tasks = Task.search(current_user, params))
+      respond_with(@tasks = Task.search(@context, params))
     end
     
     private
     
-    def get_user_details
-      
+    def get_context
+      if request.fullpath =~ /^\/my_tasks/
+        @context = current_user
+      else
+        @context = current_user.franchise
+      end
     end
   end
 end

@@ -11,6 +11,9 @@ class Task < ActiveRecord::Base
   scope :later, where("due_date > ?", 7.days.from_now)
   scope :overdue, where("due_date <= ?", Time.now)
   
+  scope :for_user, lambda {|u_id| where(:user_id => u_id)}
+  scope :for_franchise, lambda {|franchise_id| where(:task_list_id => franchise_id)}
+  
   # Little hack to bypass autoloads
   Dir[File.join(File.dirname(__FILE__),"/","*_task.rb")].each do |f|
     Task.const_get(File.basename(f,'.rb').classify)
@@ -25,35 +28,37 @@ class Task < ActiveRecord::Base
     User.find_by_id(user_id).email
   end
   
-  def self.for_franchise(franchise_id)
-    return Task.where(:task_list_id => franchise_id)
+  def self.for_context(context)
+    return for_franchise(context.id) if context.is_a? Franchise
+    return for_user(context.id) if context.is_a? User
   end
   
-  def self.for(user, options = {})
+  def self.for(context, options = {})
+    tasks = for_context(context)
+    
     if options[:completed]
-      return Task.for_franchise(user.franchise.id).completed if options[:completed] == "true"
-      return Task.for_franchise(user.franchise.id).incomplete if options[:completed] == "false"
+      return tasks.completed if options[:completed] == "true"
+      return tasks.incomplete if options[:completed] == "false"
     elsif options[:date]
-      return Task.for_franchise(user.franchise.id).today if options[:date] == "today"
-      return Task.for_franchise(user.franchise.id).tomorrow if options[:date] == "tomorrow"
-      return Task.for_franchise(user.franchise.id).week if options[:date] == "week"
-      return Task.for_franchise(user.franchise.id).later if options[:date] == "later"
-      return Task.for_franchise(user.franchise.id).without_date if options[:date] == "without_date"
-      return Task.for_franchise(user.franchise.id).overdue if options[:date] == "overdue"
-    end
-    return Task.where(:task_list_id => user.franchise.id)
-  end
-  
-  def self.search(user, search)
-    if search[:filter] and search[:filter] != "all"
-      tasks = Task.for_franchise(user.franchise.id).send(search[:filter])
-    else
-      tasks = Task.for_franchise(user.franchise.id)
+      return tasks.today if options[:date] == "today"
+      return tasks.tomorrow if options[:date] == "tomorrow"
+      return tasks.week if options[:date] == "week"
+      return tasks.later if options[:date] == "later"
+      return tasks.without_date if options[:date] == "without_date"
+      return tasks.overdue if options[:date] == "overdue"
     end
     
+    return tasks
+  end
+  
+  def self.search(context, search)
+    tasks = for_context(context)
+    
+    tasks = tasks.send(search[:filter]) if (search[:filter] and search[:filter] != "all")
     if search[:q]
       tasks = tasks.where("title LIKE :q OR description LIKE :q", :q => "%#{search[:q]}%")
     end
+    
     tasks
   end
 end
