@@ -1,0 +1,63 @@
+<div class="recently-done">
+	<div class="heading">
+		<h2>Recently Done</h2>
+		<a href="#" class="btn-close">Close</a>
+	</div>
+	<div id="task_complete_holder" class="task_complete_holder">
+
+	</div>
+</div>
+
+<script id="task_complete_template" type="text/html">
+	<div class="task-row completed" id="task_row_{{id}}">
+		<div class="box">
+			<div class="checkbox">
+				<input type="checkbox" class="checkbox" />
+			</div>
+			<div class="flag complete">
+				<a href="#"><span>Flag</span></a>
+			</div>
+			<div class="cell-2">{{type}}</div>
+			<div class="cell-3">{{title}}</div>
+			<div class="cell-4">{{due}}</div>
+			<a href="" class="opener" id="{{id}}"><span>Open/Close</span></a>
+		</div>
+		<div class="slide" id="slide_{{id}}">
+			<div class="task-info">
+				<div class="col-1">
+					<p>
+						<strong>Task Description:</strong>  
+						{{description}}
+					</p>
+				</div>
+				<div class="col-2">
+					<em class="date">{{created}}</em>
+					<ul class="task-options">
+						<li>
+							<a href="#" class="history">History</a>
+							<div class="tooltip">
+								<div class="bg"><div class="l">History</div><div class="r">&nbsp;</div></div>
+								<span class="arrow">&nbsp;</span>
+							</div>
+						</li>
+						<li>
+							<a href="/tasks/{{id}}" class="view" id="{{id}}">View</a>
+							
+							<div class="tooltip">
+								<div class="bg"><div class="l">View</div><div class="r">&nbsp;</div></div>
+								<span class="arrow">&nbsp;</span>
+							</div>
+						</li>
+						<li>
+							<a href="/tasks/{{id}}/edit" class="edit">Edit</a>
+							<div class="tooltip">
+								<div class="bg"><div class="l">Edit</div><div class="r">&nbsp;</div></div>
+								<span class="arrow">&nbsp;</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>

@@ -56,9 +56,10 @@
 		<div class="task-row" id="task_row_{{id}}">
 			<div class="box">
 				<div class="checkbox">
-					<input type="checkbox" {{#completed}}checked="checked"{{/completed}} />
+					<div class="checkboxArea" id="checkboxArea"></div>
+					<input type="checkbox" class="outtaHere" {{#completed}}checked="checked"{{/completed}} />
 				</div>
-				<div class="flag">
+				<div class="flag incomplete">
 					<a href="#"><span>Flag</span></a>
 				</div>
 				<div class="cell-2">{{type}}</div>

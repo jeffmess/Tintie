@@ -46,10 +46,12 @@ module Tintie
           respond_with(@task.errors, :status => :unprocessable_entity)
         end
       else
-        # coming from backbone
+        # coming from backbone... need to fix this!
         params.delete(:task)
         params.delete(:action)
         params.delete(:controller)
+        params.delete(:due)
+        params.delete(:created)
 
         @task = Task.find(params[:id])
         respond_with(@task.update_attributes(params))
