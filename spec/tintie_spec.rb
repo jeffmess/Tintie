@@ -7,6 +7,6 @@ describe Tintie do
   end
   
   it "should be able to create a task" do
-    
+
   end
 end
