@@ -2,6 +2,8 @@ class Task < ActiveRecord::Base
   belongs_to :task_list
   belongs_to :linkable, :polymorphic => true
   
+  # scopes
+  
   scope :completed, where(:completed => true)
   scope :incomplete, where(:completed => false)
   scope :today, where(:due_date => Time.now.beginning_of_day..Time.now.end_of_day)
