@@ -18,8 +18,22 @@ module Tintie
   CONTENT
 
       def add_tintie_routes
-        tintie_routes = %(resources :task_lists, :controller => 'tintie/task_lists', :only => [:create, :update, :index, :show]\n)
+        tintie_routes = %(# Start of Tintie Routes\n)
+        tintie_routes << %(  resources :task_lists, :controller => 'tintie/task_lists', :only => [:create, :update, :index, :show]\n)
+        tintie_routes << %(  scope :path => '/tasks', :controller => 'tintie/tasks' do\n)
+        tintie_routes << %(    match 'due_date/:date' => :due_date\n)
+        tintie_routes << %(    match 'search/:q' => :search\n)
+        tintie_routes << %(    match 'search' => :search\n)
+        tintie_routes << %(  end\n\n)
+        tintie_routes << %(  scope :path => '/my_tasks', :controller => 'tintie/tasks' do\n)
+        tintie_routes << %(    match '' => :index\n)
+        tintie_routes << %(    match 'due_date/:date' => :due_date\n)
+        tintie_routes << %(    match 'search/:q' => :search\n)
+        tintie_routes << %(    match 'search' => :search\n)
+        tintie_routes << %(  end\n\n)
         tintie_routes << %(  resources :tasks, :controller => 'tintie/tasks', :only => [:create, :update, :index, :show, :new, :edit]\n)
+        tintie_routes << %(  # End of Tintie Routes \n)
+        
         route tintie_routes
       end
 
