@@ -17,10 +17,10 @@ class Task < ActiveRecord::Base
   scope :for_franchise, lambda {|franchise_id| where(:task_list_id => franchise_id)}
   
   # Little hack to bypass autoloads
-  Dir[File.join(File.dirname(__FILE__),"/","*_task.rb")].each do |f|
-    Task.const_get(File.basename(f,'.rb').classify)
-  end
-  
+  # Dir[File.join(File.dirname(__FILE__),"/","*_task.rb")].each do |f|
+  #   Task.const_get(File.basename(f,'.rb').classify)
+  # end
+  # 
   # override deprecated method
   def self.subclasses
     direct_descendants.map(&:name)
@@ -62,5 +62,11 @@ class Task < ActiveRecord::Base
     end
     
     tasks
+  end
+  
+  def self.build_new(options = {})
+    klass = options[:task].delete(:type)
+    klass && (klass = klass.constantize)
+    return (klass || Task).new(options[:task])
   end
 end

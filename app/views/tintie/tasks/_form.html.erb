@@ -53,18 +53,13 @@
 						<%= f.text_area :description, :class => "wysiwyg", :id => "wysiwyg-textarea", :cols => "20", :rows => "10" %>
 					</div>
 					
-					<div class="row">
-						<a class="btn-action" id="submit_form">Create</a> 
-					</div>
+					<!-- <div class="row">
+						<a class="btn-action" onclick="document.forms[0].submit();" id="submit_form">Create</a> 
+					</div> -->
+					<%= f.submit %>
 					
 				</fieldset>
 			<% end %>
-			
-			<!-- <script id="task_template" type="text/html">
-			<td>{{title}}</td>
-			<td>{{created_at}}</td>
-			</script> -->
-				<!-- </div> -->
 			</div>
 		</div>
 	</div>
