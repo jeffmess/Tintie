@@ -3,9 +3,10 @@
 Gem::Specification.new do |s|
   s.name = "tintie"
   s.summary = "Collaborative Task Manager for Rails 3.1"
+  s.authors     = ["Jason Warmly"]
   s.description = "Very long description on why this gem is awesome."
   s.files = Dir["{app,lib,config,vendor}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.rdoc"]
-  s.version = "0.0.2"
+  s.version = "0.0.3"
   
   s.add_runtime_dependency("rails", ["~> 3.1.0.rc4"])
   
